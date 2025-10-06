@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Spring Boot devtools restart data
+spring-boot-devtools.properties
+
+
+
