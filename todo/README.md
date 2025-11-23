@@ -1,4 +1,6 @@
-# Todo API Endpoints
+# Todo API Endpoint built on spring boot framework
+
+
 
 Base URL: `http://localhost:8080/api/v1/todos`
 
@@ -162,4 +164,5 @@ You can also access the H2 database console at:
 - JDBC URL: `jdbc:h2:mem:testdb`
 - Username: `sa`
 - Password: (leave empty)
+
 
