@@ -1,31 +1,24 @@
 package com.example.todo.mapper;
 
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+
 import com.example.todo.dto.TodoDto;
 import com.example.todo.model.Todo;
 
-public class TodoMapper {
+@Mapper(componentModel = "spring")
+public interface TodoMapper {
+    TodoDto toDto(Todo todo);
 
-    public static TodoDto toDto(Todo t){
-        TodoDto d = new TodoDto();
-        d.setId(t.getId());
-        d.setTitle(t.getTitle());
-        d.setDescription(t.getDescription());
-        d.setCompleted(t.isCompleted());
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    Todo toEntity(TodoDto todoDto);
 
-        return d;
-    }
-
-    public static Todo toEntity(TodoDto d){
-        Todo t = new Todo();
-        t.setTitle(d.getTitle());
-        t.setDescription(d.getDescription());
-        t.setCompleted(d.isCompleted());
-        return t;
-    }
-
-    public static void updateEntity(TodoDto d, Todo t){
-        if(d.getTitle() != null) t.setTitle(d.getTitle());
-        t.setDescription(d.getDescription());
-        t.setCompleted(d.isCompleted());
-    }
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    void updateEntity(TodoDto todoDto, @MappingTarget Todo todo);
 }

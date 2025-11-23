@@ -1,20 +1,30 @@
 package com.example.todo.controller;
 
 
-import com.example.todo.dto.TodoDto;
-import com.example.todo.service.TodoService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.todo.dto.TodoDto;
+import com.example.todo.service.TodoService;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/todos")
+@RequestMapping("/api/v1/todos")
+@RequiredArgsConstructor
 public class TodoController {
-    @Autowired
-    private TodoService service;
+
+    private final TodoService service;
 
     @PostMapping
     public ResponseEntity<TodoDto> create(@Valid @RequestBody TodoDto dto){
@@ -24,21 +34,24 @@ public class TodoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<TodoDto> getById(@PathVariable Long id){
-        return ResponseEntity.ok(service.getById(id));
+        TodoDto item = service.getById(id);
+        return ResponseEntity.ok(item);
     }
 
-    @GetMapping
-    public ResponseEntity<Page<TodoDto>> list(Pageable pageable){
-        return ResponseEntity.ok(service.getAll(pageable))
+    @GetMapping("/all")
+    public ResponseEntity<Page<TodoDto>> getAll(Pageable pageable){
+        Page<TodoDto> items = service.getAll(pageable);
+        return ResponseEntity.ok(items);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TodoDto> update(@PathVariable Long id, @Valid @RequestBody TodoDto dto){
-        return ResponseEntity.ok(service.update(id, dto));
+    public ResponseEntity<TodoDto> updateItem(@PathVariable Long id, @Valid @RequestBody TodoDto dto){
+        TodoDto updatedItem = service.update(id, dto);
+        return ResponseEntity.ok(updatedItem);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> deleteItem(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }

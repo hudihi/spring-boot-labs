@@ -1,9 +1,9 @@
 package com.example.todo.service;
 
-import com.example.todo.dto.TodoDto;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.awt.print.Pageable;
+import com.example.todo.dto.TodoDto;
 
 public interface TodoService {
     TodoDto create(TodoDto dto);

@@ -1,28 +1,38 @@
 package com.example.todo.model;
 
-import jarkata.persistence.*;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
+import lombok.*;
+
+
 @Entity
-@Table(name= "todos")
+@Table(name = "Todo")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Todo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @Column(nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(length = 2000)
+
+    @Column(name = "description", nullable = false, length = 2000)
     private String description;
 
-    @Column(nullable = false)
-    private boolean completed = false;
+    @Column(name = "completed", nullable = false)
+    private boolean completed;
 
-
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
     private LocalDateTime updatedAt;
+
 
     @PrePersist
     protected void onCreate(){
@@ -30,15 +40,9 @@ public class Todo {
         updatedAt = createdAt;
     }
 
+
     @PreUpdate
     protected void onUpdate(){
         updatedAt = LocalDateTime.now();
     }
-
-    public Todo(){}
-    public Todo(String title, String description){
-        this.title = title;
-        this.description = description;
-    }
-    
 }
