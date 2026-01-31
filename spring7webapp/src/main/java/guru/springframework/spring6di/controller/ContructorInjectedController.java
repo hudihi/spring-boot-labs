@@ -1,23 +1,16 @@
 package guru.springframework.spring6di.controller;
 
-
 import guru.springframework.spring6di.services.GreetingServices;
 import guru.springframework.spring6di.services.GreetingServicesImpl;
-import org.springframework.stereotype.Controller;
 
-@Controller
-public class MyController {
-
+public class ContructorInjectedController {
     private final GreetingServices greetingServices;
 
-
-    public MyController(){
-        this.greetingServices = new GreetingServicesImpl();
+    public ContructorInjectedController(GreetingServicesImpl greetingServices){
+        this.greetingServices = greetingServices;
     }
 
     public String sayHi(){
-        System.out.println("I'm In Controller");
-
         return greetingServices.sayHi();
     }
 }
