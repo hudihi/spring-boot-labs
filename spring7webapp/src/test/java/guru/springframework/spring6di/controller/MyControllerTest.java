@@ -3,9 +3,11 @@ package guru.springframework.spring6di.controller;
 import guru.springframework.spring6di.services.GreetingServices;
 import guru.springframework.spring6di.services.GreetingServicesImpl;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class MyControllerTest {
 
     private final GreetingServices greetingServices;

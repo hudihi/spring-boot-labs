@@ -10,11 +10,7 @@ import org.springframework.context.ApplicationContext;
 public class Spring7webappApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext cxt = SpringApplication.run(Spring7webappApplication.class, args);
-
-		PropertyInjectionController controller = cxt.getBean(PropertyInjectionController.class);
-
-		System.out.println(controller.sayHi());
+	SpringApplication.run(Spring7webappApplication.class, args);
 	}
 
 }

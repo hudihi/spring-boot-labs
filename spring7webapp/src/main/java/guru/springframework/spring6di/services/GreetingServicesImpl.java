@@ -1,5 +1,8 @@
 package guru.springframework.spring6di.services;
 
+import org.springframework.stereotype.Service;
+
+@Service("greetServiceMainBean")
 public class GreetingServicesImpl implements GreetingServices {
 
     @Override
