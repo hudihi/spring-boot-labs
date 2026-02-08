@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -16,6 +17,10 @@ import java.util.UUID;
 @Controller
 public class BeerController {
     private final BeerService beerService;
+
+    public List<Beer> listBeers(){
+        return beerService.listBeers();
+    }
 
     public Beer getBeerById(UUID uuid){
         log.debug("Get Beer by I - In controller");
