@@ -1,4 +1,5 @@
 package guru.springframework.spring7restmvc.models;
 
-public class BeerStyle {
+public enum BeerStyle {
+    PALE_ALE
 }
