@@ -2,5 +2,7 @@ package guru.springframework.spring7restmvc.models;
 
 public enum BeerStyle {
     PALE_ALE,
-    IPA
+    IPA,
+    STOUT,
+    WHEAT,LAGER
 }

@@ -87,4 +87,44 @@ public class BeerServiceImpl implements BeerService{
                 .updateDate(LocalDateTime.now())
                 .build();
     }
+
+    @Override
+    public Beer saveNewBeer(Beer beer) {
+        Beer newSavedBeer = Beer.builder()
+                .id(UUID.randomUUID())
+                .beerName(beer.getBeerName())
+                .beerStyle(beer.getBeerStyle())
+                .version(beer.getVersion())
+                .upc(beer.getUpc())
+                .price(beer.getPrice())
+                .quantityOnHand(beer.getQuantityOnHand())
+                .createdDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
+                .build();
+
+        beerMap.put(newSavedBeer.getId(), newSavedBeer);
+
+        return newSavedBeer;
+    }
+
+    @Override
+    public void updateBeerById(UUID uuid, Beer beer) {
+        Beer existingBeer = beerMap.get(uuid);
+        existingBeer.setBeerName(beer.getBeerName());
+        existingBeer.setBeerStyle(beer.getBeerStyle());
+        existingBeer.setPrice(beer.getPrice());
+        existingBeer.setQuantityOnHand(beer.getQuantityOnHand());
+    }
+
+    @Override
+    public void patchBeerById(UUID uuid, Beer beer) {
+        // check for the variable and implement the logic on how you can partially update
+    }
+
+    @Override
+    public void deleteBeerById(UUID uuid) {
+        //implement the deletion logic here to delete the
+        Beer newBeerlist = beerMap.remove(uuid);
+        beerMap.put(newBeerlist.getId(), newBeerlist);
+    }
 }

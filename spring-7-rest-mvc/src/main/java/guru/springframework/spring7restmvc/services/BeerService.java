@@ -8,4 +8,12 @@ import java.util.UUID;
 public interface BeerService {
     List<Beer> listBeers();
     Beer getBeers(UUID uuid);
+
+    Beer saveNewBeer(Beer beer);
+
+    void updateBeerById(UUID uuid, Beer beer);
+
+    void patchBeerById(UUID uuid, Beer beer);
+
+    void deleteBeerById(UUID uuid);
 }
